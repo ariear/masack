@@ -7,14 +7,18 @@ import {
     ScrollView,
     TouchableWithoutFeedback,
     Image } from "react-native"
+import LoaderRecentRecipe from "./LoaderRecentRecipe"
 
 const RecentRecipe = (props) => {
     const [recentRecipe, setRecentRecipe] = useState([])
+    const [loadingRecentRecipe, setLoadingRecentRecipe] = useState(false)
   
     useEffect(() => {
+      setLoadingRecentRecipe(true)
       axios.get('https://masak-apa-tomorisakura.vercel.app/api/recipes/2')
         .then(response => {
           setRecentRecipe(response.data.results)
+          setLoadingRecentRecipe(false)
         })
     }, [])
 
@@ -39,6 +43,7 @@ const RecentRecipe = (props) => {
           }}>See all <FontAwesome5 name="arrow-right" size={17} /></Text>
        </View>
 
+
        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={{ 
          paddingLeft: 20,
          marginBottom: 20
@@ -46,7 +51,19 @@ const RecentRecipe = (props) => {
           <View style={{ 
             flexDirection: 'row',
             paddingRight: 20
-           }}>
+          }}>
+            {
+              loadingRecentRecipe && 
+              <View style={{ 
+                flexDirection: 'row',
+                paddingRight: 20
+               }}>
+                <LoaderRecentRecipe />
+                <LoaderRecentRecipe />
+                <LoaderRecentRecipe />
+                <LoaderRecentRecipe />
+              </View>
+            }
           {
             recentRecipe.map((e,index) => 
             <TouchableWithoutFeedback key={index} onPress={() => props.navigasi.navigate('DetailRecipe', { key: e.key })}>

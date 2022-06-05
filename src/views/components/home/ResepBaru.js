@@ -7,14 +7,19 @@ import {
     TouchableWithoutFeedback } from "react-native"
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5"
 import axios from 'axios'
+import LoaderNewRecipe from "./LoaderNewRecipe"
+
 
 const ResepBaru = (props) => {
     const [newRecipe,setNewRecipe] = useState([])
+    const [loadingRecipe,setLoadingRecipe] = useState(false)
 
     useEffect(() => {
+        setLoadingRecipe(true)
         axios.get('https://masak-apa-tomorisakura.vercel.app/api/recipes')
         .then(response => {
           setNewRecipe(response.data.results)
+          setLoadingRecipe(false)
       })
     }, [])
     
@@ -41,9 +46,19 @@ const ResepBaru = (props) => {
        </View>
 
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={{ 
-            paddingLeft: 20,
-            marginBottom: 10
-           }}>
+          paddingLeft: 20,
+          marginBottom: 10
+        }}> 
+            {
+              loadingRecipe &&
+              <View style={{ 
+                flexDirection: 'row'
+               }}>
+             <LoaderNewRecipe />
+             <LoaderNewRecipe />
+             <LoaderNewRecipe />
+             </View>
+            }
              <View style={{ flexDirection: 'row', alignItems: 'flex-start' , paddingRight: 20}}>
              {
                newRecipe.map((e,index) => 
