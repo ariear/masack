@@ -10,6 +10,7 @@ const Search = ({navigation}) => {
     const [charSearch,setCharSearch] = useState('')
 
     useEffect(() => {
+        console.log(navigation);
       axios.get('https://masak-apa-tomorisakura.vercel.app/api/recipes')
             .then(response => {
                 setPopularSearch(response.data.results)
@@ -73,8 +74,9 @@ const Search = ({navigation}) => {
                     {
                         popularSearch.map((e,index) =>
                             <TouchableWithoutFeedback style={{ borderWidth: 1 }} key={index} onPress={() => navigation.navigate('DetailRecipe', { key: e.key })}>
+                            <View style={{ width: '48%' }}>
                             <ImageBackground source={{ uri: e.thumb }} style={{ 
-                                width: '48%',
+                                width: '100%',
                                 paddingVertical: 25,
                                 marginBottom: 20
                             }} imageStyle={{ 
@@ -87,6 +89,7 @@ const Search = ({navigation}) => {
                                     paddingHorizontal: 10
                                 }}>{e.key.split('-').join(' ')}</Text>
                             </ImageBackground>
+                            </View>
                             </TouchableWithoutFeedback>
                         )
                     }
