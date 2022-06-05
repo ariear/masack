@@ -16,7 +16,7 @@ const Home = ({navigation}) => {
         setNewRecipe(response.data.results)
     })
 
-    axios.get('https://masak-apa-tomorisakura.vercel.app/api/categorys/recipes')
+    axios.get('https://masak-apa-tomorisakura.vercel.app/api/category/recipes')
       .then(response => {
         setListCategory(response.data.results)
       })
@@ -33,7 +33,7 @@ const Home = ({navigation}) => {
     setChooseCategory(key)
 
     let wrap = []
-    axios.get(`https://masak-apa-tomorisakura.vercel.app/api/categorys/recipes/${key}`)
+    axios.get(`https://masak-apa-tomorisakura.vercel.app/api/category/recipes/${key}`)
       .then(response => {
         for (let i = 0; i < 4; i++) {
           const element = response.data.results[i]
