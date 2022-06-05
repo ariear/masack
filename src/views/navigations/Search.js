@@ -10,7 +10,6 @@ const Search = ({navigation}) => {
     const [charSearch,setCharSearch] = useState('')
 
     useEffect(() => {
-        console.log(navigation);
       axios.get('https://masak-apa-tomorisakura.vercel.app/api/recipes')
             .then(response => {
                 setPopularSearch(response.data.results)
@@ -21,6 +20,7 @@ const Search = ({navigation}) => {
             if (charSearch == '') {
                 return false
             } 
+            setValueSearch([])
             setIsSearch(true)  
             axios.get(`https://masak-apa-tomorisakura.vercel.app/api/search/?q=${charSearch}`)
                 .then(response => {
