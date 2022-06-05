@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Home from "./src/views/Home";
 import Search from "./src/views/navigations/Search";
+import DetailRecipe from "./src/views/DetailRecipe";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -14,6 +15,7 @@ const App = () => {
     <NavigationContainer>
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="HomeScreen" component={HomeScreen} />
+      <Stack.Screen name="DetailRecipe" component={DetailRecipe} />
     </Stack.Navigator>
     </NavigationContainer>
   )

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react"
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5"
-import { Text, View , TextInput, ImageBackground, ScrollView} from "react-native"
+import { Text, View , TextInput, ImageBackground, ScrollView, TouchableWithoutFeedback} from "react-native"
 import axios from "axios"
 
-const Search = () => {
+const Search = ({navigation}) => {
     const [popularSearch,setPopularSearch] = useState([])
     const [isSearch,setIsSearch] = useState(false)
     const [valueSearch,setValueSearch] = useState([])
@@ -72,7 +72,8 @@ const Search = () => {
                 }}>
                     {
                         popularSearch.map((e,index) =>
-                            <ImageBackground key={index} source={{ uri: e.thumb }} style={{ 
+                            <TouchableWithoutFeedback style={{ borderWidth: 1 }} key={index} onPress={() => navigation.navigate('DetailRecipe', { key: e.key })}>
+                            <ImageBackground source={{ uri: e.thumb }} style={{ 
                                 width: '48%',
                                 paddingVertical: 25,
                                 marginBottom: 20
@@ -86,6 +87,7 @@ const Search = () => {
                                     paddingHorizontal: 10
                                 }}>{e.key.split('-').join(' ')}</Text>
                             </ImageBackground>
+                            </TouchableWithoutFeedback>
                         )
                     }
                 </View>
@@ -106,7 +108,8 @@ const Search = () => {
              }}>
         {
             valueSearch.map((e,index) => 
-        <View key={index} style={{ width: '48%', marginBottom: 30}}>
+            <TouchableWithoutFeedback key={index} onPress={() => navigation.navigate('DetailRecipe', { key: e.key })}>
+        <View style={{ width: '48%', marginBottom: 30}}>
             <ImageBackground source={{ uri: e.thumb }} 
               imageStyle={{ 
                 borderRadius: 15
@@ -147,6 +150,7 @@ const Search = () => {
                textTransform: 'capitalize'
               }}>{e.key.split('-').join(' ')}</Text>
          </View>
+         </TouchableWithoutFeedback>
             )
         }
         </View>

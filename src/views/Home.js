@@ -104,7 +104,8 @@ const Home = ({navigation}) => {
           <View style={{ flexDirection: 'row', alignItems: 'flex-start' , paddingRight: 20}}>
           {
             newRecipe.map((e,index) => 
-         <View key={index} style={{ width: 300 , marginRight: 20}}>
+          <TouchableWithoutFeedback key={index} onPress={() => navigation.navigate('DetailRecipe', { key: e.key })}>
+         <View style={{ width: 300 , marginRight: 20}}>
             <ImageBackground source={{ uri: e.thumb }} 
               imageStyle={{ 
                 borderRadius: 15
@@ -145,6 +146,7 @@ const Home = ({navigation}) => {
                textTransform: 'capitalize'
               }}>{e.key.split('-').join(' ')}</Text>
          </View>
+         </TouchableWithoutFeedback>
             )
           }
           </View>
@@ -184,7 +186,8 @@ const Home = ({navigation}) => {
          }}>
            {
              category.map((e, index) => 
-          <View key={index} style={{ 
+             <TouchableWithoutFeedback key={index} onPress={() => navigation.navigate('DetailRecipe', { key: e.key })}>
+          <View style={{ 
             backgroundColor: '#FAC213',
             width: '45%',
             borderRadius: 20,
@@ -222,6 +225,7 @@ const Home = ({navigation}) => {
                 <FontAwesome5 name="bookmark" size={18} />
               </View>
           </View>
+          </TouchableWithoutFeedback>
             )
            }
         </View>
@@ -255,7 +259,8 @@ const Home = ({navigation}) => {
            }}>
           {
             recentRecipe.map((e,index) => 
-         <View key={index} style={{ 
+            <TouchableWithoutFeedback key={index} onPress={() => navigation.navigate('DetailRecipe', { key: e.key })}>
+         <View style={{ 
            width: 140,
            marginRight: 20
           }}>
@@ -272,6 +277,7 @@ const Home = ({navigation}) => {
               textTransform: 'capitalize'
              }}>{e.key.split('-').join(' ')}</Text>
          </View>
+         </TouchableWithoutFeedback>
             )
           }
           </View>
