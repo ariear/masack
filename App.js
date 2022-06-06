@@ -7,6 +7,8 @@ import Home from "./src/views/Home";
 import Search from "./src/views/navigations/Search";
 import DetailRecipe from "./src/views/DetailRecipe";
 import SplashScreen from "./src/views/SplashScreen";
+import WishList from "./src/views/navigations/WishList";
+import Setting from "./src/views/navigations/Setting";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -50,6 +52,22 @@ const HomeScreen = () => {
             },
             headerShown: false
           }} />
+      <Tab.Screen name="WishList" component={WishList} options={{
+        tabBarIcon: ({ focused }) => {
+          return (
+            <Ionicon name="bookmark-outline" size={28} color={focused ? '#212121' : '#BDBDBD'} />
+            );
+          },
+          headerShown: false
+        }} />
+        <Tab.Screen name="Setting" component={Setting} options={{
+              tabBarIcon: ({ focused }) => {
+                return (
+                  <Ionicon name="settings-outline" size={28} color={focused ? '#212121' : '#BDBDBD'} />
+                );
+              },
+              headerShown: false
+            }} />
     </Tab.Navigator>
   )
 }
