@@ -66,7 +66,7 @@ const KategoriPopuler = (props) => {
              paddingRight: 20
             }}>
               {
-                loadingListKategory &&
+                loadingListKategory ?
                 <View style={{ 
                   flexDirection: 'row',
                   paddingRight: 20
@@ -76,18 +76,18 @@ const KategoriPopuler = (props) => {
                   <LoaderListKategori />
                   <LoaderListKategori />
                 </View>
-              }
-           {
-             listCategory.map((e, index) =>
-             <TouchableWithoutFeedback key={index} onPress={ () => {
-                setCategory([])
-                clickCategory(e.key) 
-              }}>
-               <Text style={[styles.category, chooseCategory === e.key ? styles.categoryActive : '']}>{e.category}</Text>
-             </TouchableWithoutFeedback> 
-            )
-           }
-           </View>
+                    :
+                      listCategory.map((e, index) =>
+                      <TouchableWithoutFeedback key={index} onPress={ () => {
+                         setCategory([])
+                         clickCategory(e.key) 
+                       }}>
+                        <Text style={[styles.category, chooseCategory === e.key ? styles.categoryActive : '']}>{e.category}</Text>
+                      </TouchableWithoutFeedback> 
+                     )
+                    }
+                    </View>
+                  
         </ScrollView>
 
 
@@ -98,7 +98,7 @@ const KategoriPopuler = (props) => {
           justifyContent: 'space-between'
         }}>
           {
-            loadingCardKategoryPopuler &&
+            loadingCardKategoryPopuler ?
             <View style={{ 
               flexDirection: 'row',
               flexWrap: 'wrap',
@@ -109,8 +109,8 @@ const KategoriPopuler = (props) => {
            <LoaderKategoriPopuler />
            <LoaderKategoriPopuler />
            </View>
-          }
-           {
+            :
+           
              category.map((e, index) => 
              <TouchableWithoutFeedback key={index} onPress={() => props.navigasi.navigate('DetailRecipe', { key: e.key })}>
           <View style={{ 
@@ -153,7 +153,8 @@ const KategoriPopuler = (props) => {
           </View>
           </TouchableWithoutFeedback>
             )
-           }
+           
+          }
         </View>
         </View>
     )

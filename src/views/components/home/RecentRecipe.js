@@ -53,7 +53,7 @@ const RecentRecipe = (props) => {
             paddingRight: 20
           }}>
             {
-              loadingRecentRecipe && 
+              loadingRecentRecipe ?
               <View style={{ 
                 flexDirection: 'row',
                 paddingRight: 20
@@ -63,8 +63,7 @@ const RecentRecipe = (props) => {
                 <LoaderRecentRecipe />
                 <LoaderRecentRecipe />
               </View>
-            }
-          {
+                :
             recentRecipe.map((e,index) => 
             <TouchableWithoutFeedback key={index} onPress={() => props.navigasi.navigate('DetailRecipe', { key: e.key })}>
          <View style={{ 
@@ -86,7 +85,7 @@ const RecentRecipe = (props) => {
          </View>
          </TouchableWithoutFeedback>
             )
-          }
+            }
           </View>
        </ScrollView>
         </View>

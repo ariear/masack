@@ -50,7 +50,7 @@ const ResepBaru = (props) => {
           marginBottom: 10
         }}> 
             {
-              loadingRecipe &&
+              loadingRecipe ?
               <View style={{ 
                 flexDirection: 'row'
                }}>
@@ -58,7 +58,7 @@ const ResepBaru = (props) => {
              <LoaderNewRecipe />
              <LoaderNewRecipe />
              </View>
-            }
+                      :
              <View style={{ flexDirection: 'row', alignItems: 'flex-start' , paddingRight: 20}}>
              {
                newRecipe.map((e,index) => 
@@ -108,6 +108,7 @@ const ResepBaru = (props) => {
                )
              }
              </View>
+            }
           </ScrollView>
           </View>
     )
