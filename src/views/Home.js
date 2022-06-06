@@ -10,7 +10,7 @@ const Home = ({navigation}) => {
   
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
-      <Sapa />
+      <Sapa navigasi={navigation} />
       <ToSearch navigasi={navigation} />
       <ResepBaru navigasi={navigation} />
       <KategoriPopuler navigasi={navigation} />
