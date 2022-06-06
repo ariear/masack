@@ -25,6 +25,7 @@ const Search = ({navigation}) => {
     
     const searchRecipe = () => {     
             if (charSearch == '') {
+                setIsSearch(false)
                 return false
             } 
             setIsValueSearchLoad(true)
