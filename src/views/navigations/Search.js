@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react"
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5"
 import { Text, View , TextInput, ImageBackground, ScrollView, TouchableWithoutFeedback} from "react-native"
 import axios from "axios"
+import LoaderPopularSearch from "../components/Search/LoaderPopularSearch"
+import LoaderSearch from "../components/Search/LoaderSearch"
 
 const Search = ({navigation}) => {
     const [popularSearch,setPopularSearch] = useState([])
@@ -9,10 +11,15 @@ const Search = ({navigation}) => {
     const [valueSearch,setValueSearch] = useState([])
     const [charSearch,setCharSearch] = useState('')
 
+    const [isPopularSearchLoad,setisPopularSearchLoad] = useState(false)
+    const [isValueSearchLoad,setIsValueSearchLoad] = useState(false)
+
     useEffect(() => {
+        setisPopularSearchLoad(true)        
       axios.get('https://masak-apa-tomorisakura.vercel.app/api/recipes')
             .then(response => {
                 setPopularSearch(response.data.results)
+                setisPopularSearchLoad(false)
             })
     }, [])
     
@@ -20,11 +27,13 @@ const Search = ({navigation}) => {
             if (charSearch == '') {
                 return false
             } 
+            setIsValueSearchLoad(true)
             setValueSearch([])
             setIsSearch(true)  
             axios.get(`https://masak-apa-tomorisakura.vercel.app/api/search/?q=${charSearch}`)
                 .then(response => {
                     setValueSearch(response.data.results)
+                    setIsValueSearchLoad(false)
                 })
     }
 
@@ -72,6 +81,20 @@ const Search = ({navigation}) => {
                     justifyContent: 'space-between'
                 }}>
                     {
+                        isPopularSearchLoad &&
+                    <View style={{ 
+                        flexDirection: 'row',
+                        flexWrap: 'wrap',
+                        justifyContent: 'space-between',
+                        paddingHorizontal: 20
+                     }}>
+                    <LoaderPopularSearch />
+                    <LoaderPopularSearch />
+                    <LoaderPopularSearch />
+                    <LoaderPopularSearch />
+                    </View>
+                    }
+                    {
                         popularSearch.map((e,index) =>
                             <TouchableWithoutFeedback style={{ borderWidth: 1 }} key={index} onPress={() => navigation.navigate('DetailRecipe', { key: e.key })}>
                             <View style={{ width: '48%' }}>
@@ -109,6 +132,21 @@ const Search = ({navigation}) => {
                 flexWrap: 'wrap',
                 justifyContent: 'space-between'
              }}>
+                 {
+                     isValueSearchLoad &&
+                     <View style={{ 
+                         flexDirection: 'row',
+                         flexWrap: 'wrap',
+                         justifyContent: 'space-between'
+                      }}>
+                         <LoaderSearch />
+                         <LoaderSearch />
+                         <LoaderSearch />
+                         <LoaderSearch />
+                         <LoaderSearch />
+                         <LoaderSearch />
+                     </View>
+                 }
         {
             valueSearch.map((e,index) => 
             <TouchableWithoutFeedback key={index} onPress={() => navigation.navigate('DetailRecipe', { key: e.key })}>
