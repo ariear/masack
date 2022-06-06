@@ -10,18 +10,25 @@ const Search = ({navigation}) => {
     const [isSearch,setIsSearch] = useState(false)
     const [valueSearch,setValueSearch] = useState([])
     const [charSearch,setCharSearch] = useState('')
+    const [notFound, setNotFound] = useState(false)
 
     const [isPopularSearchLoad,setisPopularSearchLoad] = useState(false)
     const [isValueSearchLoad,setIsValueSearchLoad] = useState(false)
 
     useEffect(() => {
+        navigation.addListener('focus', () => {
+            setIsSearch(false)
+            setNotFound(false)
+            setCharSearch('')
+        });
+
         setisPopularSearchLoad(true)        
       axios.get('https://masak-apa-tomorisakura.vercel.app/api/recipes')
             .then(response => {
                 setPopularSearch(response.data.results)
                 setisPopularSearchLoad(false)
             })
-    }, [])
+    }, [navigation])
     
     const searchRecipe = () => {     
             if (charSearch == '') {
@@ -33,6 +40,7 @@ const Search = ({navigation}) => {
             setIsSearch(true)  
             axios.get(`https://masak-apa-tomorisakura.vercel.app/api/search/?q=${charSearch}`)
                 .then(response => {
+                    response.data.results.length === 0 ? setNotFound(true) : setNotFound(false)
                     setValueSearch(response.data.results)
                     setIsValueSearchLoad(false)
                 })
@@ -55,7 +63,7 @@ const Search = ({navigation}) => {
            alignItems: 'center'
         }}>
           <FontAwesome5 name="search" size={20} color="#FAC213" />
-          <TextInput placeholder="Cari resep" autoFocus={true} onChangeText={(e) => setCharSearch(e)} onSubmitEditing={() => searchRecipe()} placeholderTextColor="#FAC213" style={{ 
+          <TextInput placeholder="Cari resep" autoFocus={true} value={charSearch} onChangeText={(e) => setCharSearch(e)} onSubmitEditing={() => searchRecipe()} placeholderTextColor="#FAC213" style={{ 
             fontFamily: 'Poppins-Light',
             flexGrow: 1,
             paddingHorizontal: 15
@@ -121,7 +129,14 @@ const Search = ({navigation}) => {
                 </ScrollView>
                 </View>
         }
-
+        {
+            notFound && 
+                <Text style={{ 
+                    fontFamily: 'Poppins-Regular',
+                    color: '#000',
+                    textAlign: 'center'
+                 }}>Resep tidak ada</Text>
+        }
         {
             isSearch && 
         <ScrollView showsVerticalScrollIndicator={false} style={{ 
