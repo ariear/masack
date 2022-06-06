@@ -2,6 +2,9 @@ import axios from "axios"
 import React, { useEffect, useState } from "react"
 import Ionicon from "react-native-vector-icons/Ionicons"
 import { ImageBackground, SafeAreaView, ScrollView, StyleSheet, Text, TouchableWithoutFeedback, View } from "react-native"
+import LoaderTitle from "./components/detailrecipe/LoaderTitle"
+import LoaderDesc from "./components/detailrecipe/LoaderDesc"
+import LoaderBahan from "./components/detailrecipe/LoaderBahan"
 
 const DetailRecipe = ({route,navigation}) => {
     const [key] = useState(route.params.key)
@@ -11,13 +14,17 @@ const DetailRecipe = ({route,navigation}) => {
     const [direction,setDirection] = useState([])
     const [isStep, setIsStep] = useState(false)
 
+    const [loader, setLoader] = useState(false)
+
     useEffect(() => {
+        setLoader(true)
       axios.get(`https://masak-apa-tomorisakura.vercel.app/api/recipe/${key}`)
         .then(response => {
             setData(response.data.results)
             setAuthor(response.data.results.author.user)
             setIngredient(response.data.results.ingredient)
             setDirection(response.data.results.step)
+            setLoader(false)
         })
     }, [])
 
@@ -75,13 +82,13 @@ const DetailRecipe = ({route,navigation}) => {
                      fontFamily: 'Poppins-Medium',
                      fontSize: 18,
                      color: '#000'
-                  }}>{data.title}</Text>
+                  }}>{data.title || <LoaderTitle />}</Text>
                   <Text style={{ 
                       fontFamily: 'Poppins-Regular',
                       fontSize: 14,
                       marginBottom: 10
                    }}>
-                      {data.desc}
+                      {data.desc || <LoaderDesc />}
                   </Text>
                   <Text style={{ 
                       fontFamily: 'Poppins-Medium',
@@ -107,6 +114,10 @@ const DetailRecipe = ({route,navigation}) => {
                    <View style={{ 
                        paddingBottom: 270
                     }}>
+                        {
+                            loader &&
+                            <LoaderBahan />
+                        }
                    {
                        !isStep && 
                             ingredinent.map((e,index) => 
