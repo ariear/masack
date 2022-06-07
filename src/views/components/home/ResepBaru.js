@@ -5,9 +5,10 @@ import {
     Text,
     ImageBackground,
     TouchableWithoutFeedback } from "react-native"
-import FontAwesome5 from "react-native-vector-icons/FontAwesome5"
+import Ionicons from "react-native-vector-icons/Ionicons"
 import axios from 'axios'
 import LoaderNewRecipe from "./LoaderNewRecipe"
+import CardResepBaru from "./CardResepBaru"
 
 
 const ResepBaru = (props) => {
@@ -22,7 +23,6 @@ const ResepBaru = (props) => {
           setLoadingRecipe(false)
       })
     }, [])
-    
 
     return (
       <View>
@@ -37,12 +37,14 @@ const ResepBaru = (props) => {
            color: '#000',
            fontSize: 20
           }}>Resep Baru</Text>
+          <TouchableWithoutFeedback onPress={() => props.navigasi.navigate('SeeAll', {title: 'Resep Baru'})}>
          <Text style={{ 
            fontFamily: 'Poppins-Medium',
            color: '#FAC213',
            fontSize: 18,
            alignItems: 'center'
-          }}>See all <FontAwesome5 name="arrow-right" size={17} /></Text>
+          }}>See all <Ionicons name="arrow-forward-outline" size={20} /></Text>
+          </TouchableWithoutFeedback>
        </View>
 
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={{ 
@@ -62,49 +64,7 @@ const ResepBaru = (props) => {
              <View style={{ flexDirection: 'row', alignItems: 'flex-start' , paddingRight: 20}}>
              {
                newRecipe.map((e,index) => 
-             <TouchableWithoutFeedback key={index} onPress={() => props.navigasi.navigate('DetailRecipe', { key: e.key })}>
-            <View style={{ width: 300 , marginRight: 20}}>
-               <ImageBackground source={{ uri: e.thumb }} 
-                 imageStyle={{ 
-                   borderRadius: 15
-                  }}
-                 style={{ 
-                   width: 300,
-                   height: 200,
-                   padding: 12,
-                   marginBottom: 10
-                  }}>
-                  <Text style={{ 
-                    backgroundColor: '#FAC213',
-                    alignSelf: 'baseline',
-                    paddingVertical: 10,
-                    paddingHorizontal: 15,
-                    color: '#fff',
-                    fontFamily: 'Poppins-Medium',
-                    borderRadius: 10
-                   }}>{e.dificulty}</Text>  
-               </ImageBackground>
-               <View style={{ 
-                 flexDirection: 'row',
-                 alignItems: 'center',
-                 justifyContent: 'space-between',
-                 paddingHorizontal: 5,
-                 marginBottom: 5
-                }}>
-               <Text style={{ 
-                 fontFamily: 'Poppins-Regular',
-                 color: 'red'
-                }}>{e.times}</Text>
-               <FontAwesome5 name="bookmark" size={18} />
-               </View>
-                <Text style={{ 
-                  fontFamily: 'Poppins-Medium',
-                  fontSize: 18,
-                  color: '#000',
-                  textTransform: 'capitalize'
-                 }}>{e.key.split('-').join(' ')}</Text>
-            </View>
-            </TouchableWithoutFeedback>
+                  <CardResepBaru key={index} e={e} navigasi={props.navigasi} />
                )
              }
              </View>

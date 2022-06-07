@@ -35,12 +35,14 @@ const RecentRecipe = (props) => {
            color: '#000',
            fontSize: 20
           }}>Resep Terkini</Text>
+          <TouchableWithoutFeedback onPress={() => props.navigasi.navigate('SeeAll', {title: 'Resep Terkini'})}>
          <Text style={{ 
            fontFamily: 'Poppins-Medium',
            color: '#FAC213',
            fontSize: 18,
            alignItems: 'center'
           }}>See all <FontAwesome5 name="arrow-right" size={17} /></Text>
+          </TouchableWithoutFeedback>
        </View>
 
 
