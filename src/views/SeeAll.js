@@ -20,14 +20,13 @@ const SeeAll = ({route,navigation}) => {
     }, [])
     
     return (
-        <ScrollView showsVerticalScrollIndicator={false} style={{ 
+        <View style={{ 
             paddingHorizontal: 20
          }}>
              <View style={{ 
-                 paddingTop: 20,
+                 paddingVertical: 20,
                  flexDirection: 'row',
-                 alignItems: 'baseline',
-                 marginBottom: 25
+                 alignItems: 'baseline'
               }}>
             <Ionicons name="arrow-back-outline" color="#000" size={30} onPress={() => navigation.goBack()} />              
             <Text style={{ 
@@ -38,10 +37,12 @@ const SeeAll = ({route,navigation}) => {
              }}>{title}</Text>
              </View>
             
+            <ScrollView showsVerticalScrollIndicator={false}>
             <View style={{ 
                 flexDirection: 'row',
                 flexWrap: 'wrap',
-                justifyContent: 'space-between'
+                justifyContent: 'space-between',
+                paddingBottom: 100
              }}>
              {
                 loading ?
@@ -105,7 +106,8 @@ const SeeAll = ({route,navigation}) => {
                  )
              }
             </View>
-        </ScrollView>
+            </ScrollView>
+        </View>
     )
 }
 
