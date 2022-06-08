@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react"
 import { Text, View, TouchableWithoutFeedback, ImageBackground, ScrollView } from "react-native"
 import Ionicons from "react-native-vector-icons/Ionicons"
 import LoaderSearch from "./components/Search/LoaderSearch"
+import CardRecipe from "./components/seeall/CardRecipe"
 
 const SeeAll = ({route,navigation}) => {
     const [loading,setLoading] = useState(false)
@@ -60,49 +61,7 @@ const SeeAll = ({route,navigation}) => {
                 </View>
                         :
                  data.map((e,index) => 
-             <TouchableWithoutFeedback key={index} onPress={() => navigation.navigate('DetailRecipe', { key: e.key })}>
-        <View style={{ width: '48%', marginBottom: 30}}>
-            <ImageBackground source={{ uri: e.thumb }} 
-              imageStyle={{ 
-                borderRadius: 15
-               }}
-              style={{ 
-                width: '100%',
-                height: 200,
-                marginBottom: 10
-               }}>
-               <Text style={{ 
-                 backgroundColor: '#FAC213',
-                 alignSelf: 'baseline',
-                 paddingVertical: 10,
-                 paddingHorizontal: 15,
-                 margin: 10,
-                 color: '#fff',
-                 fontFamily: 'Poppins-Medium',
-                 borderRadius: 10
-                }}>{e.dificulty}</Text>  
-            </ImageBackground>
-            <View style={{ 
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              paddingHorizontal: 5,
-              marginBottom: 5
-             }}>
-            <Text style={{ 
-              fontFamily: 'Poppins-Regular',
-              color: 'red'
-             }}>{e.times}</Text>
-            <Ionicons name="bookmark-outline" size={18} color="#000" />
-            </View>
-             <Text style={{ 
-               fontFamily: 'Poppins-Medium',
-               fontSize: 18,
-               color: '#000',
-               textTransform: 'capitalize'
-              }}>{e.key.split('-').join(' ')}</Text>
-         </View>
-         </TouchableWithoutFeedback>
+                    <CardRecipe key={index} e={e} navigasi={navigation} />
                  )
              }
             </View>

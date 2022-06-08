@@ -4,6 +4,7 @@ import { Text, View , TextInput, ImageBackground, ScrollView, TouchableWithoutFe
 import axios from "axios"
 import LoaderPopularSearch from "../components/Search/LoaderPopularSearch"
 import LoaderSearch from "../components/Search/LoaderSearch"
+import CardFoodSearch from "../components/Search/CardFoodSearch"
 
 const Search = ({navigation}) => {
     const [popularSearch,setPopularSearch] = useState([])
@@ -35,6 +36,7 @@ const Search = ({navigation}) => {
                 setIsSearch(false)
                 return false
             } 
+            setNotFound(false)
             setIsValueSearchLoad(true)
             setValueSearch([])
             setIsSearch(true)  
@@ -165,49 +167,7 @@ const Search = ({navigation}) => {
                  }
         {
             valueSearch.map((e,index) => 
-            <TouchableWithoutFeedback key={index} onPress={() => navigation.navigate('DetailRecipe', { key: e.key })}>
-        <View style={{ width: '48%', marginBottom: 30}}>
-            <ImageBackground source={{ uri: e.thumb }} 
-              imageStyle={{ 
-                borderRadius: 15
-               }}
-              style={{ 
-                width: '100%',
-                height: 200,
-                marginBottom: 10
-               }}>
-               <Text style={{ 
-                 backgroundColor: '#FAC213',
-                 alignSelf: 'baseline',
-                 paddingVertical: 10,
-                 paddingHorizontal: 15,
-                 margin: 10,
-                 color: '#fff',
-                 fontFamily: 'Poppins-Medium',
-                 borderRadius: 10
-                }}>{e.difficulty}</Text>  
-            </ImageBackground>
-            <View style={{ 
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              paddingHorizontal: 5,
-              marginBottom: 5
-             }}>
-            <Text style={{ 
-              fontFamily: 'Poppins-Regular',
-              color: 'red'
-             }}>{e.times}</Text>
-            <FontAwesome5 name="bookmark" size={18} />
-            </View>
-             <Text style={{ 
-               fontFamily: 'Poppins-Medium',
-               fontSize: 18,
-               color: '#000',
-               textTransform: 'capitalize'
-              }}>{e.key.split('-').join(' ')}</Text>
-         </View>
-         </TouchableWithoutFeedback>
+                <CardFoodSearch key={index} navigasi={navigation} e={e} />
             )
         }
         </View>

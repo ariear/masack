@@ -5,6 +5,7 @@ import { ImageBackground, SafeAreaView, ScrollView, StyleSheet, Text, TouchableW
 import LoaderTitle from "./components/detailrecipe/LoaderTitle"
 import LoaderDesc from "./components/detailrecipe/LoaderDesc"
 import LoaderBahan from "./components/detailrecipe/LoaderBahan"
+import Bar from "./components/detailrecipe/Bar"
 
 const DetailRecipe = ({route,navigation}) => {
     const [key] = useState(route.params.key)
@@ -35,26 +36,7 @@ const DetailRecipe = ({route,navigation}) => {
                 height: 270,
                 justifyContent: 'space-between'
              }}>
-            <View style={{ 
-                paddingTop: 20,
-                paddingHorizontal: 20,
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'space-between'
-             }}>
-            <View style={{ 
-                flexDirection: 'row',
-                alignItems: 'flex-end'
-             }}>
-            <Ionicon name="arrow-back-outline" color="#fff" size={35} onPress={() => navigation.goBack()} />
-             <Text style={{ 
-                 color: '#fff',
-                 fontFamily: 'Poppins-Medium',
-                 fontSize: 20
-              }}> Menu Details</Text>
-              </View>
-              <Ionicon name="bookmark-outline" color="#fff" size={30} />
-            </View>
+            <Bar data={data} slug={key} navigasi={navigation} />
             <View style={{ 
                 paddingBottom: 35
              }}>

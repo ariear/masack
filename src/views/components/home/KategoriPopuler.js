@@ -11,6 +11,7 @@ import FontAwesome5 from "react-native-vector-icons/FontAwesome5"
 import axios from "axios"
 import LoaderKategoriPopuler from "./LoaderKategoriPopuler"
 import LoaderListKategori from "./LoaderListKategori"
+import CardKategoriPopuler from "./CardKategoriPopuler"
 
 const KategoriPopuler = (props) => {
     const [listCategory,setListCategory] = useState([])
@@ -32,6 +33,7 @@ const KategoriPopuler = (props) => {
       }, [])
 
     const clickCategory = (key) => {
+        setCategory([])
         setloadingCardKategoryPopuler(true)
         setChooseCategory(key)
     
@@ -79,7 +81,6 @@ const KategoriPopuler = (props) => {
                     :
                       listCategory.map((e, index) =>
                       <TouchableWithoutFeedback key={index} onPress={ () => {
-                         setCategory([])
                          clickCategory(e.key) 
                        }}>
                         <Text style={[styles.category, chooseCategory === e.key ? styles.categoryActive : '']}>{e.category}</Text>
@@ -112,46 +113,7 @@ const KategoriPopuler = (props) => {
             :
            
              category.map((e, index) => 
-             <TouchableWithoutFeedback key={index} onPress={() => props.navigasi.navigate('DetailRecipe', { key: e.key })}>
-          <View style={{ 
-            backgroundColor: '#FAC213',
-            width: '45%',
-            borderRadius: 20,
-            marginBottom: 90
-           }}>
-             <View>
-            <Image source={{ uri: e.thumb }} style={{ 
-              width: 130,
-              height: 130,
-              borderRadius: 100,
-              borderWidth: 5,
-              borderColor: '#D4D925',
-              position: 'absolute',
-              top: -70,
-              alignSelf: 'center'
-             }} />
-             </View>
-             <Text style={{ 
-               fontFamily: 'Poppins-Medium',
-               fontSize: 18,
-               textAlign: 'center',
-               paddingHorizontal: 7,
-               paddingTop: 70,
-               paddingBottom: 20,
-               textTransform: 'capitalize'
-              }}>{e.key.split('-').join(' ')}</Text>
-
-              <View style={{ 
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                paddingHorizontal: 10,
-                paddingBottom: 10
-               }}>
-                <Text>{e.times}</Text>
-                <FontAwesome5 name="bookmark" size={18} />
-              </View>
-          </View>
-          </TouchableWithoutFeedback>
+              <CardKategoriPopuler e={e} navigasi={props.navigasi} key={index} />
             )
            
           }
