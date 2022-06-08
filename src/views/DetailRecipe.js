@@ -14,6 +14,7 @@ const DetailRecipe = ({route,navigation}) => {
     const [ingredinent,setIngredient] = useState([])
     const [direction,setDirection] = useState([])
     const [isStep, setIsStep] = useState(false)
+    const [readMore,setReadMore] = useState(false)
 
     const [loader, setLoader] = useState(false)
 
@@ -65,13 +66,19 @@ const DetailRecipe = ({route,navigation}) => {
                      fontSize: 18,
                      color: '#000'
                   }}>{data.title || <LoaderTitle />}</Text>
-                  <Text style={{ 
+                  <Text numberOfLines={readMore ? undefined : 5} style={{ 
                       fontFamily: 'Poppins-Regular',
-                      fontSize: 14,
-                      marginBottom: 10
+                      fontSize: 14
                    }}>
                       {data.desc || <LoaderDesc />}
                   </Text>
+                  <TouchableWithoutFeedback onPress={() => setReadMore(!readMore)}>
+                   <Text style={{ 
+                       fontFamily: 'Poppins-Light',
+                       marginBottom: 12,
+                       fontSize: 12
+                    }}>{readMore ? 'lebih sedikit' : 'lebih banyak'}...</Text>
+                    </TouchableWithoutFeedback>
                   <Text style={{ 
                       fontFamily: 'Poppins-Medium',
                       color: '#000',
