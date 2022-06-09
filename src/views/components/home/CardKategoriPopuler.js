@@ -47,7 +47,7 @@ const CardKategoriPopuler = (props) => {
         <TouchableWithoutFeedback onPress={() => props.navigasi.navigate('DetailRecipe', { key: props.e.key })}>
         <View style={{ 
           backgroundColor: '#FAC213',
-          width: '45%',
+          width: '48%',
           borderRadius: 20,
           marginBottom: 90
          }}>

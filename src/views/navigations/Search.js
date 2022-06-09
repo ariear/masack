@@ -72,7 +72,7 @@ const Search = ({navigation}) => {
            }} />
        </View>
        </View>
-
+        <ScrollView showsVerticalScrollIndicator={false}>
         {
             !isSearch &&
             <View>
@@ -84,7 +84,6 @@ const Search = ({navigation}) => {
                 marginBottom: 10
                 }}>Popular search today</Text>
 
-                <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={{ 
                     paddingHorizontal: 20,
                     flexDirection: 'row',
@@ -112,7 +111,7 @@ const Search = ({navigation}) => {
                             <ImageBackground source={{ uri: e.thumb }} style={{ 
                                 width: '100%',
                                 paddingVertical: 25,
-                                marginBottom: 20
+                                marginBottom: 10
                             }} imageStyle={{ 
                                 width: '100%'
                             }}>
@@ -128,7 +127,6 @@ const Search = ({navigation}) => {
                         )
                     }
                 </View>
-                </ScrollView>
                 </View>
         }
         {
@@ -173,6 +171,7 @@ const Search = ({navigation}) => {
         </View>
         </ScrollView>
         }
+        </ScrollView>
 
         </View>
     )

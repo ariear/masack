@@ -48,11 +48,11 @@ const CardFoodSearch = (props) => {
         <View style={{ width: '48%', marginBottom: 30}}>
             <ImageBackground source={{ uri: props.e.thumb }} 
               imageStyle={{ 
-                borderRadius: 15
+                borderRadius: 10
                }}
               style={{ 
                 width: '100%',
-                height: 200,
+                height: 150,
                 marginBottom: 10
                }}>
                <Text style={{ 
@@ -63,7 +63,8 @@ const CardFoodSearch = (props) => {
                  margin: 10,
                  color: '#fff',
                  fontFamily: 'Poppins-Medium',
-                 borderRadius: 10
+                 borderRadius: 10,
+                 fontSize: 12
                 }}>{props.e.difficulty}</Text>  
             </ImageBackground>
             <View style={{ 
@@ -81,7 +82,7 @@ const CardFoodSearch = (props) => {
             </View>
              <Text style={{ 
                fontFamily: 'Poppins-Medium',
-               fontSize: 18,
+               fontSize: 17,
                color: '#000',
                textTransform: 'capitalize'
               }}>{props.e.key.split('-').join(' ')}</Text>

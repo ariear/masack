@@ -4,9 +4,9 @@ import ContentLoader, { Rect, Circle, Path } from "react-content-loader/native"
 const LoaderPopularSearch = (props) => (
   <ContentLoader 
     speed={2}
-    width={190}
-    height={130}
-    viewBox="0 0 190 130"
+    width={130}
+    height={90}
+    viewBox="0 0 130 90"
     backgroundColor="#DDDDDD"
     foregroundColor="#ecebeb"
     style={{ 
@@ -14,7 +14,7 @@ const LoaderPopularSearch = (props) => (
      }}
     {...props}
   >
-    <Rect x="0" y="0" rx="0" ry="0" width="190" height="130" />
+    <Rect x="0" y="0" rx="0" ry="0" width="130" height="90" />
   </ContentLoader>
 )
 

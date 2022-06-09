@@ -72,6 +72,8 @@ const DetailRecipe = ({route,navigation}) => {
                    }}>
                       {data.desc || <LoaderDesc />}
                   </Text>
+                  {
+                      !loader &&
                   <TouchableWithoutFeedback onPress={() => setReadMore(!readMore)}>
                    <Text style={{ 
                        fontFamily: 'Poppins-Light',
@@ -79,6 +81,7 @@ const DetailRecipe = ({route,navigation}) => {
                        fontSize: 12
                     }}>{readMore ? 'lebih sedikit' : 'lebih banyak'}...</Text>
                     </TouchableWithoutFeedback>
+                  }
                   <Text style={{ 
                       fontFamily: 'Poppins-Medium',
                       color: '#000',
