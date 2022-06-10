@@ -6,15 +6,17 @@ import {
     TouchableWithoutFeedback } from "react-native"
 import Ionicons from "react-native-vector-icons/Ionicons"
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useAppContextHome } from "../../../contexts/HomeContext";
 
 const CardResepBaru = (props) => {
     const [colorIconWishlist, setcolorIconWishlist] = useState('bookmark-outline')
-    const [wishtlistLocal, setwishtlistLocal] = useState([])
+
+    const HomeContext = useAppContextHome()
 
     const addWishlist = (value) => {
       setcolorIconWishlist(colorIconWishlist === 'bookmark' ? 'bookmark-outline' : 'bookmark')
       
-      const newData = [...wishtlistLocal, {
+      const newData = [...HomeContext.wishtlistLocal, {
         title: value.key,
         thumb: value.thumb,
         dificulty: value.dificulty,
@@ -23,25 +25,16 @@ const CardResepBaru = (props) => {
       
       if (colorIconWishlist !== 'bookmark') {        
         AsyncStorage.setItem('wishtlist', JSON.stringify(newData)).then(() => {
-          setwishtlistLocal(newData)
+          HomeContext.setwishtlistLocal(newData)
         })
       }
     }
 
-    const getData = () => {
-          AsyncStorage.getItem('wishtlist').then(data => {
-            if (data !== null) {
-              setwishtlistLocal(JSON.parse(data))
-            }
-          })
-      }
-
     useEffect(() => {
-      getData()
-      wishtlistLocal.forEach(e => {
+      HomeContext.wishtlistLocal.forEach(e => {
         e.title === props.e.key ? setcolorIconWishlist('bookmark') : ''
       })
-    }, [wishtlistLocal])
+    }, [HomeContext.wishtlistLocal])
     
 
     return (

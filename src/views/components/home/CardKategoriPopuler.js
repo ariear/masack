@@ -6,15 +6,17 @@ import {
     Text } from "react-native"
 import Ionicons from "react-native-vector-icons/Ionicons"
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useAppContextHome } from "../../../contexts/HomeContext";
 
 const CardKategoriPopuler = (props) => {
     const [colorIconWishlist, setcolorIconWishlist] = useState('bookmark-outline')
-    const [wishtlistLocal, setwishtlistLocal] = useState([])
+
+    const useHomeContext = useAppContextHome()
 
     const addWishlist = (value) => {
         setcolorIconWishlist(colorIconWishlist === 'bookmark' ? 'bookmark-outline' : 'bookmark')
         
-        const newData = [...wishtlistLocal, {
+        const newData = [...useHomeContext.wishtlistLocal, {
           title: value.key,
           thumb: value.thumb,
           dificulty: value.dificulty,
@@ -23,25 +25,16 @@ const CardKategoriPopuler = (props) => {
         
         if (colorIconWishlist !== 'bookmark') {        
           AsyncStorage.setItem('wishtlist', JSON.stringify(newData)).then(() => {
-            setwishtlistLocal(newData)
+            useHomeContext.setwishtlistLocal(newData)
           })
         }
       }
 
-      const getData = () => {
-        AsyncStorage.getItem('wishtlist').then(data => {
-          if (data !== null) {
-            setwishtlistLocal(JSON.parse(data))
-          }
-        })
-    }
-
     useEffect(() => {
-        getData()
-        wishtlistLocal.forEach(e => {
+        useHomeContext.wishtlistLocal.forEach(e => {
           e.title === props.e.key ? setcolorIconWishlist('bookmark') : ''
         })
-      }, [wishtlistLocal])
+      }, [useHomeContext.wishtlistLocal])
 
     return (
         <TouchableWithoutFeedback onPress={() => props.navigasi.navigate('DetailRecipe', { key: props.e.key })}>

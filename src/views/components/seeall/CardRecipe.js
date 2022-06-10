@@ -9,27 +9,17 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const CardRecipe = (props) => {
     const [colorIconWishlist, setcolorIconWishlist] = useState('bookmark-outline')
-    const [wishtlistLocal, setwishtlistLocal] = useState([])
-
-    const getData = () => {
-        AsyncStorage.getItem('wishtlist').then(data => {
-          if (data !== null) {
-            setwishtlistLocal(JSON.parse(data))
-          }
-        })
-    }
 
     useEffect(() => {
-        getData()
-        wishtlistLocal.forEach(e => {
+        props.wishtlistLocal.forEach(e => {
           e.title === props.e.key ? setcolorIconWishlist('bookmark') : ''
         })
-      }, [wishtlistLocal])
+      }, [props.wishtlistLocal])
 
     const addWishlist = (value) => {
         setcolorIconWishlist(colorIconWishlist === 'bookmark' ? 'bookmark-outline' : 'bookmark')
         
-        const newData = [...wishtlistLocal, {
+        const newData = [...props.wishtlistLocal, {
           title: value.key,
           thumb: value.thumb,
           dificulty: value.dificulty,
@@ -38,7 +28,7 @@ const CardRecipe = (props) => {
         
         if (colorIconWishlist !== 'bookmark') {        
           AsyncStorage.setItem('wishtlist', JSON.stringify(newData)).then(() => {
-            setwishtlistLocal(newData)
+            props.setwishtlistLocal(newData)
           })
         }
       }

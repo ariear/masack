@@ -4,10 +4,8 @@ import {
     View,
     ScrollView,
     TouchableWithoutFeedback,
-    Image,
     StyleSheet
      } from "react-native"
-import FontAwesome5 from "react-native-vector-icons/FontAwesome5"
 import axios from "axios"
 import LoaderKategoriPopuler from "./LoaderKategoriPopuler"
 import LoaderListKategori from "./LoaderListKategori"

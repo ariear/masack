@@ -4,14 +4,16 @@ import { Text, View, TouchableWithoutFeedback, ImageBackground, ScrollView } fro
 import Ionicons from "react-native-vector-icons/Ionicons"
 import LoaderSearch from "./components/Search/LoaderSearch"
 import CardRecipe from "./components/seeall/CardRecipe"
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const SeeAll = ({route,navigation}) => {
     const [loading,setLoading] = useState(false)
     const [data,setData] = useState([])
     const [title] = useState(route.params.title)
+    const [wishtlistLocal, setwishtlistLocal] = useState([])
 
     useEffect(() => {
-    
+    getData()
     setLoading(true)
     axios.get('https://masak-apa-tomorisakura.vercel.app/api/recipes/1')
         .then(response => {
@@ -19,6 +21,14 @@ const SeeAll = ({route,navigation}) => {
             setLoading(false)
         })
     }, [])
+
+    const getData = () => {
+        AsyncStorage.getItem('wishtlist').then(data => {
+          if (data !== null) {
+            setwishtlistLocal(JSON.parse(data))
+          }
+        })
+    }
     
     return (
         <View style={{ 
@@ -61,7 +71,7 @@ const SeeAll = ({route,navigation}) => {
                 </View>
                         :
                  data.map((e,index) => 
-                    <CardRecipe key={index} e={e} navigasi={navigation} />
+                    <CardRecipe key={index} e={e} navigasi={navigation} wishtlistLocal={wishtlistLocal} setwishtlistLocal={setwishtlistLocal} />
                  )
              }
             </View>

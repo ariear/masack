@@ -5,6 +5,7 @@ import axios from "axios"
 import LoaderPopularSearch from "../components/Search/LoaderPopularSearch"
 import LoaderSearch from "../components/Search/LoaderSearch"
 import CardFoodSearch from "../components/Search/CardFoodSearch"
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Search = ({navigation}) => {
     const [popularSearch,setPopularSearch] = useState([])
@@ -16,7 +17,10 @@ const Search = ({navigation}) => {
     const [isPopularSearchLoad,setisPopularSearchLoad] = useState(false)
     const [isValueSearchLoad,setIsValueSearchLoad] = useState(false)
 
+    const [wishtlistLocal, setwishtlistLocal] = useState([])
+
     useEffect(() => {
+        getData()
         navigation.addListener('focus', () => {
             setIsSearch(false)
             setNotFound(false)
@@ -46,6 +50,14 @@ const Search = ({navigation}) => {
                     setValueSearch(response.data.results)
                     setIsValueSearchLoad(false)
                 })
+    }
+
+    const getData = () => {
+        AsyncStorage.getItem('wishtlist').then(data => {
+          if (data !== null) {
+            setwishtlistLocal(JSON.parse(data))
+          }
+        })
     }
 
     return (
@@ -165,7 +177,7 @@ const Search = ({navigation}) => {
                  }
         {
             valueSearch.map((e,index) => 
-                <CardFoodSearch key={index} navigasi={navigation} e={e} />
+                <CardFoodSearch key={index} navigasi={navigation} e={e} setwishtlistLocal={setwishtlistLocal} wishtlistLocal={wishtlistLocal} />
             )
         }
         </View>
