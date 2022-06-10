@@ -1,5 +1,5 @@
 import React from "react"
-import {ScrollView} from "react-native"
+import {ScrollView, StatusBar} from "react-native"
 import { AppContextHome } from "../contexts/HomeContext"
 import KategoriPopuler from "./components/home/KategoriPopuler"
 import RecentRecipe from "./components/home/RecentRecipe"
@@ -11,6 +11,7 @@ const Home = ({navigation}) => {
   
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
+      <StatusBar backgroundColor="#FAC213" />
       <AppContextHome>
       <Sapa navigasi={navigation} />
       <ToSearch navigasi={navigation} />
