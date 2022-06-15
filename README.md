@@ -5,6 +5,16 @@ Project ini juga open source jadi kalian bisa mengclone projectnya atau bahkan b
 
 ![](https://github.com/ArieAkbarull/masack/blob/main/showcase/ezgif-4-898d8e88f5.gif)
 
+![](https://github.com/ArieAkbarull/masack/blob/main/showcase/kering.png)
+
+![](https://github.com/ArieAkbarull/masack/blob/main/showcase/ezgif-4-898d8e88f5.gif)
+
+![](https://github.com/ArieAkbarull/masack/blob/main/showcase/ezgif-4-898d8e88f5.gif)
+
+![](https://github.com/ArieAkbarull/masack/blob/main/showcase/ezgif-4-898d8e88f5.gif)
+
+![](https://github.com/ArieAkbarull/masack/blob/main/showcase/ezgif-4-898d8e88f5.gif)
+
 <img src="https://i.ibb.co/QCjpP8p/Screenshot-2022-06-15-20-08-49-16-be8f42f436541123dcba380ac1447436.png">
 
 <img src="https://i.ibb.co/kHFJ5Dv/Screenshot-2022-06-15-20-08-23-00-be8f42f436541123dcba380ac1447436.png">
