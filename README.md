@@ -7,7 +7,7 @@ Project ini juga open source jadi kalian bisa mengclone projectnya atau bahkan b
 
 ![](https://github.com/ArieAkbarull/masack/blob/main/showcase/kering.png)
 
-![](https://github.com/ArieAkbarull/masack/blob/main/showcase/ezgif-4-898d8e88f5.gif)
+![](https://github.com/ArieAkbarull/masack/blob/main/showcase/cari.png)
 
 ![](https://github.com/ArieAkbarull/masack/blob/main/showcase/ezgif-4-898d8e88f5.gif)
 
